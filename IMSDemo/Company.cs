@@ -17,7 +17,16 @@ namespace IMSDemo
 
         public string Name { get; set; }
 
+        public Location Location { get; set; }
 
+        public Inventory Inventory { get; set; }
+
+        public void Reset()
+        {
+            this.Location = null;
+            this.Name = null;
+            this.Inventory = null;
+        }
         
     }
 }
