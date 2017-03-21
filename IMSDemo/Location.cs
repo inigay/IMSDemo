@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace IMSDemo
 {
-    class Location
+    public class Location
     {
         public int Id { get; set; }
 
@@ -19,6 +20,9 @@ namespace IMSDemo
         public string State { get; set; }
 
         public int zip { get; set; }
+
+        [Required]
+        public virtual Company Company { get; set; }
 
     }
 }

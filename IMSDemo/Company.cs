@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IMSDemo
 {
-    class Company
+    public class Company
     {
         public Company()
         {
@@ -15,11 +12,12 @@ namespace IMSDemo
 
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; }    
 
-        public Location Location { get; set; }
+        public virtual IEnumerable<Location> Location { get; set; }
 
-        public Inventory Inventory { get; set; }
+        [ForeignKey("Id")]
+        public virtual Inventory Inventory { get; set; }
 
         public void Reset()
         {

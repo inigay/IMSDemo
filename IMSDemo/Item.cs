@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IMSDemo
 {
-    class Item
+    public class Item
     {
         public int Id { get; set; }
 
@@ -19,6 +16,10 @@ namespace IMSDemo
         public int ItemsInStock { get; set; }
 
         public bool IsActive { get; set; }
+
+        public virtual ICollection<Inventory> Inventories { get; set; }
+        
+        public virtual ICollection<Manufacturer> Manufacturers { get; set; }
 
 
         public void Activate(bool isActive)

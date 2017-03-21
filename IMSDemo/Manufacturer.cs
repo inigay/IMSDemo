@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace IMSDemo
 {
-    class Manufacturer
+    public class Manufacturer
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public IEnumerable<Item> Items { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
     }
 }

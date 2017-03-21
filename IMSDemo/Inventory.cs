@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IMSDemo
 {
-    class Inventory
+    public class Inventory
     {
+        [Key]
+        [Column("InventoryId")]
         public int Id { get; set; }
 
         public string Category { get; set; }
 
-        public IEnumerable<Item> Items { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
 
-        public IEnumerable<Manufacturer> MyProperty { get; set; }
+        [Required]
+        public Company Company { get; set; }
     }
 }
