@@ -17,6 +17,7 @@ namespace API.Controllers
         {
             this.repo = new CompanyRepository(new IMSDemoContext());
         }
+
         // GET: api/Company
         public IEnumerable<Company> Get()
         {
@@ -32,8 +33,6 @@ namespace API.Controllers
         // POST: api/Company
         public void Post([FromBody]string value)
         {
-            Company comp = new Company { Name = "Some Company" };
-            repo.InsertCompany(comp);
         }
 
         // PUT: api/Company/5
