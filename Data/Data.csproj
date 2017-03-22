@@ -52,9 +52,13 @@
     <Compile Include="CompanyRepository.cs" />
     <Compile Include="ICompanyRepository.cs" />
     <Compile Include="IMSDemoContext.cs" />
-    <Compile Include="Migrations\201703212033517_initial.cs" />
-    <Compile Include="Migrations\201703212033517_initial.Designer.cs">
-      <DependentUpon>201703212033517_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201703220044180_initial.cs" />
+    <Compile Include="Migrations\201703220044180_initial.Designer.cs">
+      <DependentUpon>201703220044180_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703220625167_changes.cs" />
+    <Compile Include="Migrations\201703220625167_changes.Designer.cs">
+      <DependentUpon>201703220625167_changes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,8 +74,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703212033517_initial.resx">
-      <DependentUpon>201703212033517_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703220044180_initial.resx">
+      <DependentUpon>201703220044180_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703220625167_changes.resx">
+      <DependentUpon>201703220625167_changes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

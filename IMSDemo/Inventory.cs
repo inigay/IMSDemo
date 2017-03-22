@@ -6,15 +6,14 @@ namespace IMSDemo
 {
     public class Inventory
     {
-        [Key]
-        [Column("InventoryId")]
-        public int Id { get; set; }
+       [Key]
+       [ForeignKey("Company")]
+        public int InventoryId { get; set; }
 
         public string Category { get; set; }
 
         public virtual ICollection<Item> Items { get; set; }
-
-        [Required]
-        public Company Company { get; set; }
+        
+        public virtual Company Company { get; set; }
     }
 }

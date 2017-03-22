@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace IMSDemo
 {
@@ -10,20 +11,21 @@ namespace IMSDemo
 
         }
 
+        [Key]
         public int Id { get; set; }
 
-        public string Name { get; set; }    
+        public string Name { get; set; }
 
-        public virtual IEnumerable<Location> Location { get; set; }
+        public virtual ICollection<Location> Location { get; set; }
 
-        [ForeignKey("Id")]
-        public virtual Inventory Inventory { get; set; }
+        public virtual Inventory Inventory {get;set;}
+
 
         public void Reset()
         {
             this.Location = null;
             this.Name = null;
-            this.Inventory = null;
+            
         }
         
     }

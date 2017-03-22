@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using IMSDemo;
 using Data;
+using API.Models.Dto;
 
 namespace API.Controllers
 {
@@ -25,14 +26,31 @@ namespace API.Controllers
         }
 
         // GET: api/Company/5
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            Company comp = repo.GetCompanyById(id);
+            var res = new CompanyDto
+            {
+                Id = comp.Id,
+                Name = comp.Name,
+                InventoryId = comp.Inventory.InventoryId,
+                
+            };
+
+            return Ok(res);
         }
 
         // POST: api/Company
         public void Post([FromBody]string value)
         {
+            var company = new Company { Name = "Some Company" };
+            var inv = new Inventory { Category = "Some Category" };
+
+            company.Inventory = inv;
+
+            repo.InsertCompany(company);
+            repo.Save();
+
         }
 
         // PUT: api/Company/5

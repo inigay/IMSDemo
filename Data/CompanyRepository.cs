@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IMSDemo;
+using System.Data.Entity;
 
 namespace Data
 {
@@ -21,6 +22,27 @@ namespace Data
             throw new NotImplementedException();
         }
 
+
+        public IEnumerable<Company> GetCompanies()
+        {
+            return context.Companies;
+        }
+
+        public Company GetCompanyById(int companyId)
+        {
+            return context.Companies.Where(c => c.Id == companyId).Include(c  => c.Inventory).FirstOrDefault();
+        }
+
+        public void InsertCompany(Company company)
+        {
+            context.Companies.Add(company);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)
@@ -35,33 +57,12 @@ namespace Data
             this.disposed = true;
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        public IEnumerable<Company> GetCompanies()
-        {
-            return context.Companies.ToList();
-        }
-
-        public Company GetCompanyById(int companyId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InsertCompany(Company company)
-        {
-            context.Companies.Add(company);
-        }
-
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
-
         public void UpdateCompany(Company company)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
         {
             throw new NotImplementedException();
         }
