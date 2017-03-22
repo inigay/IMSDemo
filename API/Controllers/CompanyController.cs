@@ -78,19 +78,55 @@ namespace API.Controllers
             repo.InsertCompany(company);
             repo.Save();
 
-            return Ok();
+            return Ok(company.Id);
 
         }
 
         // PUT: api/Company/5
-        public void Put([FromUri]int id, [FromBody]CompanyDto value)
+        public IHttpActionResult Put([FromUri]int id, [FromBody]CompanyDto value)
         {
+            Company comp = repo.GetCompanyById(id);
+            
+            if (comp != null)
+            {
+                comp.Name = value.Name;
+                comp.Location.Address = value.Address;
+                comp.Location.AddressOpt = value.AddressOpt;
+                comp.Location.City = value.City;
+                comp.Location.Zip = value.Zip;
+                comp.Location.State = value.State;
 
+                repo.UpdateCompany(comp);
+                repo.Save();
+
+                
+
+            }else
+            {
+                throw new KeyNotFoundException("The Company you're trying to edit doesn't exist");
+            }
+
+            var res = new CompanyDto
+            {
+                Id = comp.Id,
+                Name = comp.Name,
+                InventoryId = comp.Inventory.InventoryId,
+                Address = comp.Location.Address,
+                AddressOpt = comp.Location.AddressOpt,
+                City = comp.Location.City,
+                State = comp.Location.State,
+                Zip = comp.Location.Zip
+            };
+
+            return Ok(res);
         }
 
         // DELETE: api/Company/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            repo.DeleteCompany(id);
+            repo.Save();
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }

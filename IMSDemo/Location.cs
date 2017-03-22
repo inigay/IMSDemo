@@ -24,6 +24,7 @@ namespace IMSDemo
 
         public int Zip { get; set; }
         
+        [Required]
         public virtual Company Company { get; set; }
 
     }

@@ -19,7 +19,10 @@ namespace Data
 
         public void DeleteCompany(int companyId)
         {
-            throw new NotImplementedException();
+            Company comp = context.Companies.Find(companyId);
+            context.Inventories.Remove(comp.Inventory);
+            context.Locations.Remove(comp.Location);
+            context.Companies.Remove(comp);
         }
 
 
@@ -59,7 +62,7 @@ namespace Data
 
         public void UpdateCompany(Company company)
         {
-            throw new NotImplementedException();
+            context.Entry(company).State = EntityState.Modified;
         }
 
         public void Dispose()

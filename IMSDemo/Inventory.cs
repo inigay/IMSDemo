@@ -14,6 +14,7 @@ namespace IMSDemo
 
         public virtual ICollection<Item> Items { get; set; }
         
+        [Required]
         public virtual Company Company { get; set; }
     }
 }
