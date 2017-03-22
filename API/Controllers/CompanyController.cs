@@ -20,9 +20,23 @@ namespace API.Controllers
         }
 
         // GET: api/Company
-        public IEnumerable<Company> Get()
+        public IEnumerable<CompanyDto> Get()
         {
-            return repo.GetCompanies();
+            IEnumerable<Company> comps = repo.GetCompanies();
+
+            var res = from comp in comps
+                      select new CompanyDto
+                      {
+                          Id = comp.Id,
+                          Name = comp.Name,
+                          InventoryId = comp.Inventory.InventoryId,
+                          Address = (comp.Location == null) ? "" : comp.Location.Address,
+                          AddressOpt = (comp.Location == null) ? "" : comp.Location.AddressOpt,
+                          City = (comp.Location == null) ? "" : comp.Location.City,
+                          State = (comp.Location == null) ? "" : comp.Location.State,
+                          Zip = (comp.Location == null) ? 0 : comp.Location.Zip
+                      };
+            return res;
         }
 
         // GET: api/Company/5
@@ -34,28 +48,44 @@ namespace API.Controllers
                 Id = comp.Id,
                 Name = comp.Name,
                 InventoryId = comp.Inventory.InventoryId,
-                
+                Address = comp.Location.Address,
+                AddressOpt = comp.Location.AddressOpt,
+                City = comp.Location.City,
+                State = comp.Location.State,
+                Zip = comp.Location.Zip
             };
 
             return Ok(res);
         }
 
         // POST: api/Company
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]CompanyDto value)
         {
-            var company = new Company { Name = "Some Company" };
-            var inv = new Inventory { Category = "Some Category" };
+            Company company = new Company {
+                Name = value.Name,
+                Location = new Location
+                {
+                    Address = value.Address,
+                    AddressOpt = value.AddressOpt,
+                    City = value.City,
+                    State = value.State,
+                    Zip = value.Zip
+                },
+                Inventory = new Inventory()
+            };
 
-            company.Inventory = inv;
-
+            
             repo.InsertCompany(company);
             repo.Save();
+
+            return Ok();
 
         }
 
         // PUT: api/Company/5
-        public void Put(int id, [FromBody]string value)
+        public void Put([FromUri]int id, [FromBody]CompanyDto value)
         {
+
         }
 
         // DELETE: api/Company/5

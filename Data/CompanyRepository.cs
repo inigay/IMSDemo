@@ -25,12 +25,12 @@ namespace Data
 
         public IEnumerable<Company> GetCompanies()
         {
-            return context.Companies;
+            return context.Companies.ToList();
         }
 
         public Company GetCompanyById(int companyId)
         {
-            return context.Companies.Where(c => c.Id == companyId).Include(c  => c.Inventory).FirstOrDefault();
+            return context.Companies.Where(c => c.Id == companyId).Include(c  => c.Inventory).Include(c => c.Location).FirstOrDefault();
         }
 
         public void InsertCompany(Company company)

@@ -16,7 +16,7 @@ namespace IMSDemo
 
         public string Name { get; set; }
 
-        public virtual ICollection<Location> Location { get; set; }
+        public virtual Location Location { get; set; }
 
         public virtual Inventory Inventory {get;set;}
 
@@ -25,7 +25,7 @@ namespace IMSDemo
         {
             this.Location = null;
             this.Name = null;
-            
+            this.Inventory = null;
         }
         
     }
