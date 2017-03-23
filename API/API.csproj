@@ -171,13 +171,13 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Business1\Business.csproj">
+      <Project>{81cf47a1-b6a8-4868-8864-2c9d432b0043}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\Data.csproj">
       <Project>{62737fb7-0dd7-4018-8e63-e90eb1fdfa2b}</Project>
       <Name>Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IMSDemo\Business.csproj">
-      <Project>{2ceb0aa8-ee15-4dbb-bc00-20ec319dfb75}</Project>
-      <Name>Business</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
@@ -191,7 +191,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54167</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

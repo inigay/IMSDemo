@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IMSDemo {
+namespace Business.Entities {
 	public class Inventory {
 		[Key]
 		[ForeignKey("Company")]

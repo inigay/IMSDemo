@@ -1,25 +1,14 @@
-﻿using Data;
-using IMSDemo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Data;
 
-namespace Test
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            var repo = new CompanyRepository(new IMSDemoContext());
+namespace Test {
+	internal class Program {
+		private static void Main(string[] args) {
+			var repo = new CompanyRepository(new IMSDemoContext());
 
-            var companies = repo.GetCompanies();
+			var companies = repo.GetCompanies();
 
-            foreach (var item in companies)
-            {
-                Console.WriteLine(item.Name);
-            }
-        }
-    }
+			foreach (var item in companies) Console.WriteLine(item.Name);
+		}
+	}
 }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace IMSDemo {
+namespace Business.Entities {
 	public class Manufacturer {
 		public int Id { get; set; }
 

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IMSDemo {
+namespace Business.Entities {
 	public class Item {
 		public int Id { get; set; }
 
@@ -21,7 +20,7 @@ namespace IMSDemo {
 
 
 		public void Activate(bool isActive) {
-			this.IsActive = isActive;
+			IsActive = isActive;
 		}
 	}
 }

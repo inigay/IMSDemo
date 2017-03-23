@@ -72,12 +72,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IMSDemo\Business.csproj">
-      <Project>{2ceb0aa8-ee15-4dbb-bc00-20ec319dfb75}</Project>
-      <Name>Business</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -94,6 +88,12 @@
     <EmbeddedResource Include="Migrations\201703222346420_company_cascade_delete.resx">
       <DependentUpon>201703222346420_company_cascade_delete.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Business1\Business.csproj">
+      <Project>{81cf47a1-b6a8-4868-8864-2c9d432b0043}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
