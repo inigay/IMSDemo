@@ -20,7 +20,10 @@ namespace Data
         public void DeleteCompany(int companyId)
         {
             Company comp = context.Companies.Find(companyId);
-            context.Inventories.Remove(comp.Inventory);
+            if (comp.Inventory != null)
+            {
+                context.Inventories.Remove(comp.Inventory);
+            } 
             context.Locations.Remove(comp.Location);
             context.Companies.Remove(comp);
         }

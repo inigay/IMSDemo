@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using IMSDemo;
 using Data;
@@ -14,9 +12,9 @@ namespace API.Controllers
     {
         private ICompanyRepository repo;
 
-        public CompanyController()
+        public CompanyController(ICompanyRepository repository)
         {
-            this.repo = new CompanyRepository(new IMSDemoContext());
+            this.repo = repository;
         }
 
         // GET: api/Company
@@ -24,18 +22,8 @@ namespace API.Controllers
         {
             IEnumerable<Company> comps = repo.GetCompanies();
 
-            var res = from comp in comps
-                      select new CompanyDto
-                      {
-                          Id = comp.Id,
-                          Name = comp.Name,
-                          InventoryId = comp.Inventory.InventoryId,
-                          Address = (comp.Location == null) ? "" : comp.Location.Address,
-                          AddressOpt = (comp.Location == null) ? "" : comp.Location.AddressOpt,
-                          City = (comp.Location == null) ? "" : comp.Location.City,
-                          State = (comp.Location == null) ? "" : comp.Location.State,
-                          Zip = (comp.Location == null) ? 0 : comp.Location.Zip
-                      };
+            var res = AutoMapper.Mapper.Map<IEnumerable<CompanyDto>>(comps);
+
             return res;
         }
 
@@ -43,17 +31,7 @@ namespace API.Controllers
         public IHttpActionResult Get(int id)
         {
             Company comp = repo.GetCompanyById(id);
-            var res = new CompanyDto
-            {
-                Id = comp.Id,
-                Name = comp.Name,
-                InventoryId = comp.Inventory.InventoryId,
-                Address = comp.Location.Address,
-                AddressOpt = comp.Location.AddressOpt,
-                City = comp.Location.City,
-                State = comp.Location.State,
-                Zip = comp.Location.Zip
-            };
+            CompanyDto res = AutoMapper.Mapper.Map<CompanyDto>(comp);
 
             return Ok(res);
         }
@@ -61,20 +39,8 @@ namespace API.Controllers
         // POST: api/Company
         public IHttpActionResult Post([FromBody]CompanyDto value)
         {
-            Company company = new Company {
-                Name = value.Name,
-                Location = new Location
-                {
-                    Address = value.Address,
-                    AddressOpt = value.AddressOpt,
-                    City = value.City,
-                    State = value.State,
-                    Zip = value.Zip
-                },
-                Inventory = new Inventory()
-            };
+            Company company = AutoMapper.Mapper.Map<Company>(value);
 
-            
             repo.InsertCompany(company);
             repo.Save();
 
@@ -89,13 +55,12 @@ namespace API.Controllers
             
             if (comp != null)
             {
-                comp.Name = value.Name;
-                comp.Location.Address = value.Address;
-                comp.Location.AddressOpt = value.AddressOpt;
-                comp.Location.City = value.City;
-                comp.Location.Zip = value.Zip;
-                comp.Location.State = value.State;
+                value.Id = comp.Id;
+                int tempLocationId = comp.Location.LocationId;
+                comp = AutoMapper.Mapper.Map(value, comp);
 
+                comp.Location.LocationId = tempLocationId;
+                
                 repo.UpdateCompany(comp);
                 repo.Save();
 
@@ -106,17 +71,7 @@ namespace API.Controllers
                 throw new KeyNotFoundException("The Company you're trying to edit doesn't exist");
             }
 
-            var res = new CompanyDto
-            {
-                Id = comp.Id,
-                Name = comp.Name,
-                InventoryId = comp.Inventory.InventoryId,
-                Address = comp.Location.Address,
-                AddressOpt = comp.Location.AddressOpt,
-                City = comp.Location.City,
-                State = comp.Location.State,
-                Zip = comp.Location.Zip
-            };
+            var res = AutoMapper.Mapper.Map<CompanyDto>(comp);
 
             return Ok(res);
         }
